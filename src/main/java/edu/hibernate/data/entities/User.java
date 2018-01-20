@@ -5,37 +5,36 @@ import java.util.Date;
 
 @Entity
 @Table(name = "finances_user")
+@Access(value=AccessType.PROPERTY)
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID")
     private Long userId;
 
-    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "BIRTH_DATE")
     private Date birthDate;
 
-    @Column(name = "EMAIL_ADDRESS")
     private String emailAddress;
 
-    @Column(name = "LAST_UPDATED_DATE")
     private Date lastUpdateDate;
 
-    @Column(name = "LAST_UPDATED_BY")
     private String lastUpdateby;
 
-    @Column(name = "CREATED_DATE")
     private Date createdDate;
 
-    @Column(name = "CREATED_BY")
     private String createdBy;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "user_table_generator")
+    @TableGenerator(
+            name="user_table_generator",
+            table = "ifinances_keys",
+            pkColumnName = "PK_NAME",
+            valueColumnName = "PK_VALUE"
+    )
+    @Column(name = "USER_ID")
     public Long getUserId() {
         return userId;
     }
@@ -44,6 +43,7 @@ public class User {
         this.userId = userId;
     }
 
+    @Column(name = "FIRST_NAME")
     public String getFirstName() {
         return firstName;
     }
@@ -52,6 +52,7 @@ public class User {
         this.firstName = firstName;
     }
 
+    @Column(name = "LAST_NAME")
     public String getLastName() {
         return lastName;
     }
@@ -60,6 +61,7 @@ public class User {
         this.lastName = lastName;
     }
 
+    @Column(name = "BIRTH_DATE", nullable = false)
     public Date getBirthDate() {
         return birthDate;
     }
@@ -68,6 +70,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    @Column(name = "EMAIL_ADDRESS")
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -76,6 +79,7 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
+    @Column(name = "LAST_UPDATED_DATE")
     public Date getLastUpdateDate() {
         return lastUpdateDate;
     }
@@ -84,6 +88,7 @@ public class User {
         this.lastUpdateDate = lastUpdateDate;
     }
 
+    @Column(name = "LAST_UPDATED_BY")
     public String getLastUpdateby() {
         return lastUpdateby;
     }
@@ -92,6 +97,7 @@ public class User {
         this.lastUpdateby = lastUpdateby;
     }
 
+    @Column(name = "CREATED_DATE", updatable = false)
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -100,6 +106,7 @@ public class User {
         this.createdDate = createdDate;
     }
 
+    @Column(name = "CREATED_BY", updatable = false)
     public String getCreatedBy() {
         return createdBy;
     }
