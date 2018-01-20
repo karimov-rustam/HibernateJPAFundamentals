@@ -26,14 +26,19 @@ public class User {
 
     private String createdBy;
 
+    private boolean valid;
+
+    @Transient
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "user_table_generator")
-    @TableGenerator(
-            name="user_table_generator",
-            table = "ifinances_keys",
-            pkColumnName = "PK_NAME",
-            valueColumnName = "PK_VALUE"
-    )
+    @GeneratedValue
     @Column(name = "USER_ID")
     public Long getUserId() {
         return userId;

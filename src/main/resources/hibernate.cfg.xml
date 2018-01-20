@@ -20,6 +20,7 @@
         <property name="show_sql">true</property>
 
         <mapping class="edu.hibernate.data.entities.User"/>
+        <mapping class="edu.hibernate.data.entities.TimeTest"/>
 
     </session-factory>
 
