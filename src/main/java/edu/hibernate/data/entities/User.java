@@ -1,5 +1,7 @@
 package edu.hibernate.data.entities;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -27,6 +29,17 @@ public class User {
     private String createdBy;
 
     private boolean valid;
+
+    private int age;
+
+    @Formula("lower(datediff(curdate(), birth_date)/365)")
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     @Transient
     public boolean isValid() {
