@@ -1,10 +1,10 @@
 package edu.hibernate.data;
 
-import edu.hibernate.data.entities.TimeTest;
+import edu.hibernate.data.entities.Address;
 import edu.hibernate.data.entities.User;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Application {
@@ -14,34 +14,31 @@ public class Application {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         try {
-            session.getTransaction().begin();
-            TimeTest test = new TimeTest(new Date());
-            session.save(test);
-            session.getTransaction().commit();
-            session.refresh(test);
-            System.out.println(test.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            session.getTransaction().begin();
+            Transaction transaction = session.beginTransaction();
 
             User user = new User();
-            user.setBirthDate(getMyBirthday());
-            user.setCreatedDate(new Date());
+            Address address = new Address();
+
+            user.setAge(22);
+            user.setBirthDate(new Date());
             user.setCreatedBy("Rustam");
+            user.setCreatedDate(new Date());
             user.setEmailAddress("test@test.com");
             user.setFirstName("Rustam");
             user.setLastName("Karimov");
             user.setLastUpdateby("Rustam");
             user.setLastUpdateDate(new Date());
 
-            session.save(user);
-            session.getTransaction().commit();
+            address.setAddressLine1("line 1");
+            address.setAddressLine2("line 2");
+            address.setCity("Samara");
+            address.setState("Sa");
+            address.setZipCode("44308");
 
-            session.refresh(user);
-            System.out.println(user.getAge());
+            user.setAddress(address);
+            session.save(user);
+
+            transaction.commit();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,13 +46,5 @@ public class Application {
             session.close();
             HibernateUtil.getSessionFactory().close();
         }
-    }
-
-    private static Date getMyBirthday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 1984);
-        calendar.set(Calendar.MONTH, 6);
-        calendar.set(Calendar.DATE, 19);
-        return calendar.getTime();
     }
 }

@@ -7,32 +7,57 @@ import java.util.Date;
 
 @Entity
 @Table(name = "finances_user")
-@Access(value=AccessType.PROPERTY)
 public class User {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "USER_ID")
     private Long userId;
 
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
+    @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "BIRTH_DATE")
     private Date birthDate;
 
+    @Column(name = "EMAIL_ADDRESS")
     private String emailAddress;
 
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name = "addressLine1", column = @Column(name = "USER_ADDRESS_LINE_1")),
+            @AttributeOverride(name = "addressLine2", column = @Column(name = "USER_ADDRESS_LINE_2"))
+    })
+    private Address address;
+
+    @Column(name = "LAST_UPDATED_DATE")
     private Date lastUpdateDate;
 
+    @Column(name = "LAST_UPDATED_BY")
     private String lastUpdateby;
 
+    @Column(name = "CREATED_DATE", updatable = false)
     private Date createdDate;
 
+    @Column(name = "CREATED_BY", updatable = false)
     private String createdBy;
 
+    @Transient
     private boolean valid;
 
+    @Formula("lower(datediff(curdate(), birth_date)/365)")
     private int age;
 
-    @Formula("lower(datediff(curdate(), birth_date)/365)")
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public int getAge() {
         return age;
     }
@@ -41,7 +66,6 @@ public class User {
         this.age = age;
     }
 
-    @Transient
     public boolean isValid() {
         return valid;
     }
@@ -50,9 +74,6 @@ public class User {
         this.valid = valid;
     }
 
-    @Id
-    @GeneratedValue
-    @Column(name = "USER_ID")
     public Long getUserId() {
         return userId;
     }
@@ -61,7 +82,6 @@ public class User {
         this.userId = userId;
     }
 
-    @Column(name = "FIRST_NAME")
     public String getFirstName() {
         return firstName;
     }
@@ -70,7 +90,6 @@ public class User {
         this.firstName = firstName;
     }
 
-    @Column(name = "LAST_NAME")
     public String getLastName() {
         return lastName;
     }
@@ -79,7 +98,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    @Column(name = "BIRTH_DATE", nullable = false)
     public Date getBirthDate() {
         return birthDate;
     }
@@ -88,7 +106,6 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    @Column(name = "EMAIL_ADDRESS")
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -97,7 +114,6 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    @Column(name = "LAST_UPDATED_DATE")
     public Date getLastUpdateDate() {
         return lastUpdateDate;
     }
@@ -106,7 +122,6 @@ public class User {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    @Column(name = "LAST_UPDATED_BY")
     public String getLastUpdateby() {
         return lastUpdateby;
     }
@@ -115,7 +130,6 @@ public class User {
         this.lastUpdateby = lastUpdateby;
     }
 
-    @Column(name = "CREATED_DATE", updatable = false)
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -124,7 +138,6 @@ public class User {
         this.createdDate = createdDate;
     }
 
-    @Column(name = "CREATED_BY", updatable = false)
     public String getCreatedBy() {
         return createdBy;
     }
