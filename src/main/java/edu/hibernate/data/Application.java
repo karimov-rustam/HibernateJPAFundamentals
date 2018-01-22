@@ -18,6 +18,7 @@ public class Application {
 
             User user = new User();
             Address address = new Address();
+            Address address2 = new Address();
 
             user.setAge(22);
             user.setBirthDate(new Date());
@@ -29,13 +30,12 @@ public class Application {
             user.setLastUpdateby("Rustam");
             user.setLastUpdateDate(new Date());
 
-            address.setAddressLine1("line 1");
-            address.setAddressLine2("line 2");
-            address.setCity("Samara");
-            address.setState("Sa");
-            address.setZipCode("44308");
+            setAddressFields(address);
+            setAddressFields2(address2);
 
-            user.setAddress(address);
+            user.getAddress().add(address);
+            user.getAddress().add(address2);
+
             session.save(user);
 
             transaction.commit();
@@ -46,5 +46,21 @@ public class Application {
             session.close();
             HibernateUtil.getSessionFactory().close();
         }
+    }
+
+    private static void setAddressFields(Address address) {
+        address.setAddressLine1("line 1");
+        address.setAddressLine2("line 2");
+        address.setCity("Samara");
+        address.setState("Sa");
+        address.setZipCode("44308");
+    }
+
+    private static void setAddressFields2(Address address) {
+        address.setAddressLine1("line 3");
+        address.setAddressLine2("line 4");
+        address.setCity("Moscow");
+        address.setState("MO");
+        address.setZipCode("12345");
     }
 }
