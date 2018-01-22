@@ -1,9 +1,7 @@
 package edu.hibernate.data.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "bank")
@@ -39,8 +37,9 @@ public class Bank {
 
     @ElementCollection
     @CollectionTable(name = "bank_contact", joinColumns = @JoinColumn(name = "BANK_ID"))
+    @MapKeyColumn(name = "POSITION_TYPE")
     @Column(name = "NAME")
-    private List<String> contacts = new ArrayList<>();
+    private Map<String, String> contacts = new HashMap<>();
 
     public Long getBankId() {
         return bankId;
@@ -138,11 +137,11 @@ public class Bank {
         this.createdBy = createdBy;
     }
 
-    public List<String> getContacts() {
+    public Map<String, String> getContacts() {
         return contacts;
     }
 
-    public void setContacts(List<String> contacts) {
+    public void setContacts(Map<String, String> contacts) {
         this.contacts = contacts;
     }
 }
