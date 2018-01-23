@@ -16,6 +16,9 @@ public class User {
     @Column(name = "USER_ID")
     private Long userId;
 
+    @OneToOne(mappedBy = "user")
+    private Credential credential;
+
     @Column(name = "FIRST_NAME")
     private String firstName;
 
@@ -52,6 +55,14 @@ public class User {
 
     @Formula("lower(datediff(curdate(), birth_date)/365)")
     private int age;
+
+    public Credential getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Credential credential) {
+        this.credential = credential;
+    }
 
     public List<Address> getAddress() {
         return address;
