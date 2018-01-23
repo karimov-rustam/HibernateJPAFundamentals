@@ -1,4 +1,5 @@
-import edu.hibernate.data.HibernateUtil;
+package edu.hibernate.data;
+
 import edu.hibernate.data.entities.Bank;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
