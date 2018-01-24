@@ -15,13 +15,12 @@ public class Account {
     @Column(name = "ACCOUNT_ID")
     private Long accountId;
 
-    @Column(name = "NAME")
-    private String name;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ACCOUNT_ID", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private
     List<Transaction> transactions = new ArrayList<>();
+
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "INITIAL_BALANCE")
     private BigDecimal initialBalance;

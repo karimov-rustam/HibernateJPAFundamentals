@@ -13,8 +13,8 @@ public class Transaction {
     @Column(name = "TRANSACTION_ID")
     private Long transactionId;
 
-    @ManyToOne
-    @JoinColumn(name = "ACCOUNT_ID", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
     @Column(name = "TRANSACTION_TYPE")
