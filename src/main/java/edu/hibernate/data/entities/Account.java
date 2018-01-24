@@ -2,9 +2,7 @@ package edu.hibernate.data.entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "account")
@@ -14,6 +12,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ACCOUNT_ID")
     private Long accountId;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_account", joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> user = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private
@@ -132,5 +135,13 @@ public class Account {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
     }
 }

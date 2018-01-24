@@ -1,9 +1,9 @@
 package edu.hibernate.data;
 
-import edu.hibernate.data.entities.Account;
-import edu.hibernate.data.entities.Transaction;
+import edu.hibernate.data.entities.*;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class MyUtil {
@@ -52,5 +52,41 @@ public class MyUtil {
         shoePurchase.setNotes("Nice Pair of Shoes");
         shoePurchase.setTransactionType("Debit");
         return shoePurchase;
+    }
+
+    public static User createUser() {
+        User user = new User();
+        Address address = new Address();
+        user.setAge(34);
+        user.setAddress(Arrays.asList(new Address[]{createAddress()}));
+        user.setBirthDate(new Date());
+        user.setCreatedBy("Rustam");
+        user.setCreatedDate(new Date());
+        user.setCredential(createCredential(user));
+        user.setEmailAddress("test@test.com");
+        user.setFirstName("Rustam");
+        user.setLastName("Karimov");
+        user.setLastUpdateby("Rustam");
+        user.setLastUpdateDate(new Date());
+        return user;
+    }
+
+    private static Credential createCredential(User user) {
+        Credential credential = new Credential();
+        credential.setUser(user);
+        credential.setUsername("test_username");
+        credential.setPassword("test_password");
+        return credential;
+    }
+
+    private static Address createAddress() {
+        Address address = new Address();
+        address.setAddressLine1("Address Line 1");
+        address.setAddressLine2("Address Line 2");
+        address.setCity("Samara");
+        address.setState("SA");
+        address.setZipCode("12345");
+        address.setAddressType("Primary");
+        return address;
     }
 }
