@@ -16,11 +16,16 @@ public class AppOneToMany {
             org.hibernate.Transaction transaction = session.beginTransaction();
 
             Account account = createNewAccount();
-            account.getTransactions().add(createNewBeltPurchase());
-            account.getTransactions().add(createNewShoePurchase());
+            account.getTransactions().add(createNewBeltPurchase(account));
+            account.getTransactions().add(createNewShoePurchase(account));
             session.save(account);
 
             transaction.commit();
+
+            Transaction dbTransaction = (Transaction) session.get(Transaction.class,
+                    account.getTransactions().get(0).getTransactionId());
+            System.out.println(dbTransaction.getAccount().getName());
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -29,8 +34,9 @@ public class AppOneToMany {
         }
     }
 
-    private static Transaction createNewShoePurchase() {
+    private static Transaction createNewShoePurchase(Account account) {
         Transaction shoePurchase = new Transaction();
+        shoePurchase.setAccount(account);
         shoePurchase.setTitle("Work Shoes");
         shoePurchase.setAmount(new BigDecimal("100.00"));
         shoePurchase.setClosingBalance(new BigDecimal("0.00"));
@@ -44,8 +50,9 @@ public class AppOneToMany {
         return shoePurchase;
     }
 
-    private static Transaction createNewBeltPurchase() {
+    private static Transaction createNewBeltPurchase(Account account) {
         Transaction beltPurchase = new Transaction();
+        beltPurchase.setAccount(account);
         beltPurchase.setTitle("Dress Belt");
         beltPurchase.setAmount(new BigDecimal("50.00"));
         beltPurchase.setClosingBalance(new BigDecimal("0.00"));
