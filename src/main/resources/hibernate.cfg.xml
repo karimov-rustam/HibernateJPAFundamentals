@@ -22,6 +22,8 @@
         <mapping class="edu.hibernate.data.entities.User"/>
         <mapping class="edu.hibernate.data.entities.Bank"/>
         <mapping class="edu.hibernate.data.entities.Credential"/>
+        <mapping class="edu.hibernate.data.entities.Account"/>
+        <mapping class="edu.hibernate.data.entities.Transaction"/>
 
     </session-factory>
 
