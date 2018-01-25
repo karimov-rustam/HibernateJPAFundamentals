@@ -144,4 +144,12 @@ public class Bank {
     public void setContacts(Map<String, String> contacts) {
         this.contacts = contacts;
     }
+
+    public void setAddressType(String addressType) {
+        this.address.setAddressType(addressType);
+    }
+
+    public String getAddressType() {
+        return address.getAddressType();
+    }
 }

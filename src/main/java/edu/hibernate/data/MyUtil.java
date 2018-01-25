@@ -89,4 +89,21 @@ public class MyUtil {
         address.setAddressType("Primary");
         return address;
     }
+
+    static Bank createBank() {
+        Bank bank = new Bank();
+        bank.setName("First United Federal");
+        bank.setAddressLine1("103 Washington Plaza");
+        bank.setAddressLine2("Suite 332");
+        bank.setAddressType("PRIMARY");
+        bank.setCity("New York");
+        bank.setCreatedBy("Rustam Karimov");
+        bank.setCreatedDate(new Date());
+        bank.setInternational(false);
+        bank.setLastUpdateBy("rustam");
+        bank.setLastUpdatedDate(new Date());
+        bank.setState("NY");
+        bank.setZipCode("10000");
+        return bank;
+    }
 }
