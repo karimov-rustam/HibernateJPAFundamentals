@@ -16,10 +16,15 @@ public class AppManyToMany {
             User user1 = MyUtil.createUser();
             User user2 = MyUtil.createUser();
 
-            account1.getUser().add(user1);
-            account1.getUser().add(user2);
-            account2.getUser().add(user1);
-            account2.getUser().add(user2);
+            account1.getUsers().add(user1);
+            account1.getUsers().add(user2);
+            user1.getAccounts().add(account1);
+            user2.getAccounts().add(account1);
+
+            account2.getUsers().add(user1);
+            account2.getUsers().add(user2);
+            user1.getAccounts().add(account2);
+            user2.getAccounts().add(account2);
 
             session.save(account1);
             session.save(account2);
@@ -27,7 +32,10 @@ public class AppManyToMany {
             transaction.commit();
 
             Account dbAccount = (Account) session.get(Account.class, account1.getAccountId());
-            System.out.println(dbAccount.getUser().iterator().next().getEmailAddress());
+            System.out.println(dbAccount.getUsers().iterator().next().getEmailAddress());
+
+            User dbUser = (User) session.get(User.class, user1.getUserId());
+            System.out.println(dbUser.getAccounts().iterator().next().getName());
 
         } catch (Exception e) {
             e.printStackTrace();

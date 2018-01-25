@@ -3,9 +3,7 @@ package edu.hibernate.data.entities;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "finances_user")
@@ -15,6 +13,9 @@ public class User {
     @GeneratedValue
     @Column(name = "USER_ID")
     private Long userId;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    private Set<Account> accounts = new HashSet<>();
 
     @OneToOne(mappedBy = "user")
     private Credential credential;
@@ -158,5 +159,13 @@ public class User {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
     }
 }

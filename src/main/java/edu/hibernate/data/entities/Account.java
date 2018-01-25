@@ -16,7 +16,7 @@ public class Account {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_account", joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> user = new HashSet<>();
+    private Set<User> users = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private
@@ -137,11 +137,11 @@ public class Account {
         this.createdBy = createdBy;
     }
 
-    public Set<User> getUser() {
-        return user;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUser(Set<User> user) {
-        this.user = user;
+    public void setUsers(Set<User> user) {
+        this.users = user;
     }
 }
