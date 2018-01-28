@@ -9,17 +9,26 @@ import javax.persistence.Persistence;
 
 public class AppJPAConfig {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("infinite-finances");
-        EntityManager em = emf.createEntityManager();
+        EntityManagerFactory factory = null;
+        EntityManager em = null;
+        EntityTransaction tx = null;
 
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
 
-        Bank bank = MyUtil.createBank();
-        em.persist(bank);
+        try {
+            factory = Persistence.createEntityManagerFactory("inifinite-finances");
+            em = factory.createEntityManager();
+            tx = em.getTransaction();
+            tx.begin();
 
-        tx.commit();
-        em.close();
-        emf.close();
+            Bank bank = MyUtil.createBank();
+            em.persist(bank);
+
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+        } finally {
+            em.close();
+            factory.close();
+        }
     }
 }
