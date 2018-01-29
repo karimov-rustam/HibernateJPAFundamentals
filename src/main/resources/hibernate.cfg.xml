@@ -25,6 +25,7 @@
         <mapping class="edu.hibernate.data.entities.Account"/>
         <mapping class="edu.hibernate.data.entities.Transaction"/>
         <mapping class="edu.hibernate.data.entities.Budget"/>
+        <mapping class="edu.hibernate.data.entities.Currency"/>
 
     </session-factory>
 
