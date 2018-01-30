@@ -22,6 +22,10 @@ public class Account {
     private
     List<Transaction> transactions = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ACCOUNT_TYPE")
+    private AccountType accountType;
+
     @Column(name = "NAME")
     private String name;
 
@@ -48,6 +52,14 @@ public class Account {
 
     @Column(name = "CREATED_BY")
     private String createdBy;
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
 
     public List<Transaction> getTransactions() {
         return transactions;
