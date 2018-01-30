@@ -27,6 +27,8 @@
         <mapping class="edu.hibernate.data.entities.Budget"/>
         <mapping class="edu.hibernate.data.entities.Currency"/>
         <mapping class="edu.hibernate.data.entities.Market"/>
+        <mapping class="edu.hibernate.data.entities.Stock"/>
+        <mapping class="edu.hibernate.data.entities.Bond"/>
 
     </session-factory>
 

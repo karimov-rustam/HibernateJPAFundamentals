@@ -106,4 +106,25 @@ public class MyUtil {
         bank.setZipCode("10000");
         return bank;
     }
+
+    static Stock createStock() {
+        Stock stock = new Stock();
+        stock.setIssuer("Allen Edmonds");
+        stock.setName("Private American Stock Purchases");
+        stock.setPurchaseDate(new Date());
+        stock.setQuantity(new BigDecimal("1922"));
+        stock.setSharePrice(new BigDecimal("100.0"));
+        return stock;
+    }
+
+    public static Bond createBond() {
+        Bond bond = new Bond();
+        bond.setInterestRate(new BigDecimal("123.22"));
+        bond.setIssuer("JP Morgan Chase");
+        bond.setMaturityDate(new Date());
+        bond.setPurchaseDate(new Date());
+        bond.setName("Long Term Bond Purchases");
+        bond.setValue(new BigDecimal("10.22"));
+        return bond;
+    }
 }
