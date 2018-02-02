@@ -29,6 +29,7 @@
         <mapping class="edu.hibernate.data.entities.Market"/>
         <mapping class="edu.hibernate.data.entities.Stock"/>
         <mapping class="edu.hibernate.data.entities.Bond"/>
+        <mapping class="edu.hibernate.data.entities.Portfolio"/>
 
     </session-factory>
 
