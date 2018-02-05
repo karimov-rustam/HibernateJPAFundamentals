@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "stock")
+@DiscriminatorValue("ST")
 public class Stock extends Investment {
 
 

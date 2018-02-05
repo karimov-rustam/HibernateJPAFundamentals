@@ -4,16 +4,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "investment_type")
+@Table(name = "investment")
 public abstract class Investment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "key_generator")
-    @TableGenerator(
-            table = "ifinances_keys",
-            pkColumnName = "PK_NAME",
-            valueColumnName = "PK_VALUE",
-            name = "key_generator")
+    @GeneratedValue
     @Column(name = "INVESTMENT_ID")
     private Long investmentId;
 
