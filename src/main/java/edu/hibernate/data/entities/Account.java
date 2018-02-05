@@ -18,6 +18,8 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
 
+    private String newField;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private
     List<Transaction> transactions = new ArrayList<>();
