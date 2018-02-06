@@ -23,10 +23,14 @@ public class HqlAppJoins {
             Query query = session.createQuery("select distinct t.account from Transaction t " +
                     "where t.amount > 500 and lower(t.transactionType) = 'deposit'");
 
-            List<Account> accounts = query.list();
+            Query query1 = session.getNamedQuery("Account.largeDeopsits");
+
+            List<Account> accounts = query1.list();
+            System.out.println("Query has been executed. ");
 
             for (Account a : accounts) {
                 System.out.println(a.getName());
+                System.out.println(a.getBank().getName());
             }
 
             tx.commit();

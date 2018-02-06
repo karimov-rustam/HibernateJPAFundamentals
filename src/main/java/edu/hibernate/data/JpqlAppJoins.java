@@ -1,6 +1,7 @@
 package edu.hibernate.data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class JpqlAppJoins {
@@ -23,7 +24,10 @@ public class JpqlAppJoins {
                     "from Transaction t " +
                     "where t.amount > 500 and  t.transactionType = 'Deposit'");
 
-            List<Object[]> accounts = query.getResultList();
+            Query query1 = em.createNamedQuery("Account.byWithdrawAmount");
+            query1.setParameter("amount", new BigDecimal("99"));
+
+            List<Object[]> accounts = query1.getResultList();
 
             for (Object[] a : accounts) {
                 System.out.println(a[0]);

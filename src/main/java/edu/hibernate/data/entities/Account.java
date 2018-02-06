@@ -6,6 +6,14 @@ import java.util.*;
 
 @Entity
 @Table(name = "account")
+@NamedQueries({
+        @NamedQuery(name = "Account.largeDeopsits", query = "select distinct t.account from Transaction t " +
+                "where t.amount > 500 and lower(t.transactionType) = 'deposit'"),
+        @NamedQuery(name = "Account.byWithdrawAmount", query = "select distinct t.account.name, " +
+                "concat(concat(t.account.bank.name, ' '), t.account.bank.address.state) " +
+                "from  Transaction t " +
+                "where t.amount > :amount and  t.transactionType = 'withdrawl'")
+})
 public class Account {
 
     @Id
@@ -18,7 +26,7 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BANK_ID")
     private Bank bank;
 
