@@ -18,6 +18,10 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "BANK_ID")
+    private Bank bank;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private
     List<Transaction> transactions = new ArrayList<>();
@@ -52,6 +56,14 @@ public class Account {
 
     @Column(name = "CREATED_BY")
     private String createdBy;
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 
     public AccountType getAccountType() {
         return accountType;
